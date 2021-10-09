@@ -24,7 +24,6 @@ function GameLevel_01(level) {
     this.kProjectileTexture = "assets/EMPPulse.png";
     this.kProjectileTexture2 = "assets/bullet.png";
     this.kimpact = "assets/particle.png";
-    this.kCue = "assets/sounds/BGClip.mp3";
     this.kShield = "assets/escudo.png";
     this.kKey = "assets/key.png";
 
@@ -103,7 +102,6 @@ GameLevel_01.prototype.loadScene = function () {
     gEngine.Textures.loadTexture(this.kBgLayer);
     gEngine.Textures.loadTexture(this.kBgLayerNormal);
     gEngine.Textures.loadTexture(this.kimpact);
-    gEngine.AudioClips.loadAudio(this.kCue);
     gEngine.AudioClips.loadAudio(this.kTimer);
     gEngine.AudioClips.loadAudio(this.kOpen);
 };
@@ -133,7 +131,6 @@ GameLevel_01.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kBgLayer);
     gEngine.Textures.unloadTexture(this.kBgLayerNormal);
     gEngine.Textures.unloadTexture(this.kimpact);
-    gEngine.AudioClips.unloadAudio(this.kCue);
     gEngine.AudioClips.unloadAudio(this.kTimer);
     gEngine.AudioClips.unloadAudio(this.kOpen);
 
@@ -149,9 +146,7 @@ GameLevel_01.prototype.unloadScene = function () {
 GameLevel_01.prototype.initialize = function () {
 
     var timer = this.kTimer;
-    setTimeout(function () {
-    
-         
+    setTimeout(function () {    
         gEngine.AudioClips.playBackgroundAudio(timer); 
     }, 1000);
 
