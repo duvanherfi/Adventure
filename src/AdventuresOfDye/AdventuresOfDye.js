@@ -23,16 +23,16 @@ AdventuresOfDye.prototype.initialize = function () {
     // Step A: set up the cameras
     this.mCamera = new Camera(
         vec2.fromValues(50, 50), // position of the camera
-        100,                        // width of camera
+        130,                        // width of camera
         [0, 0, 1280, 720],         // viewport (orgX, orgY, width, height)
         2
     );
-    this.mCamera.setBackgroundColor([0.5, 0.5, 0.9, 1]);
+    this.mCamera.setBackgroundColor([0, 0, 0, 1]);
 
     this.mMsg = new FontRenderable("This is splash screen");
     this.mMsg.setColor([1, 0, 0, 1]);
     this.mMsg.getXform().setPosition(10, 50);
-    this.mMsg.setTextHeight(5);
+    this.mMsg.setTextHeight(2);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
@@ -42,11 +42,45 @@ AdventuresOfDye.prototype.draw = function () {
     gEngine.Core.clearCanvas([0.9, 0.9, 0.9, 1.0]); // clear to light gray
     
     this.mCamera.setupViewProjection();
-    this.mMsg.setText("Press enter for continue");
-    this.mMsg.getXform().setPosition(10, 55);
+    this.mMsg.setText("CONTROLS");
+    this.mMsg.getXform().setPosition(10, 75);
     this.mMsg.draw(this.mCamera);
-    this.mMsg.setText("<Enter> to Start");
+
+    this.mMsg.setText("A: Move left");
+    this.mMsg.getXform().setPosition(10, 70);
+    this.mMsg.draw(this.mCamera);
+
+    this.mMsg.setText("D: Move right");
+    this.mMsg.getXform().setPosition(10, 65);
+    this.mMsg.draw(this.mCamera);
+
+    this.mMsg.setText("Space: Jump");
+    this.mMsg.getXform().setPosition(10, 60);
+    this.mMsg.draw(this.mCamera);
+
+
+    this.mMsg.setText("UPGRADES");
+    this.mMsg.getXform().setPosition(10, 50);
+    this.mMsg.draw(this.mCamera);
+
+    this.mMsg.setText("Shield: Block de projectiles");
     this.mMsg.getXform().setPosition(10, 45);
+    this.mMsg.draw(this.mCamera);
+
+    this.mMsg.setText("Reloj: Reduce speed projectiles");
+    this.mMsg.getXform().setPosition(10, 40);
+    this.mMsg.draw(this.mCamera);
+
+    this.mMsg.setText("Weapon: Shoot projectiles to destroy the boss");
+    this.mMsg.getXform().setPosition(10, 35);
+    this.mMsg.draw(this.mCamera);
+
+    this.mMsg.setText("Complete the game before the time is 0 !");
+    this.mMsg.getXform().setPosition(10, 25);
+    this.mMsg.draw(this.mCamera);
+
+    this.mMsg.setText("<Enter> to Start");
+    this.mMsg.getXform().setPosition(10, 20);
     this.mMsg.draw(this.mCamera);
 };
 

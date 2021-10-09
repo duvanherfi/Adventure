@@ -38,8 +38,8 @@ function GameLevel_02(level, time) {
     this.mCamera = null;
     this.mPeekCam = null;
     this.mShowPeek = false;
-    this.t = time || new FontRenderable("60");
-    this.mMsg = time || new FontRenderable("60");
+    this.t = time 
+    this.mMsg = time 
     this.pruebas = null;
     this.mRestart = false;
     // the hero and the support objects

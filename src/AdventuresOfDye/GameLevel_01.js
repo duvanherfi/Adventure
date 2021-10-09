@@ -197,7 +197,7 @@ GameLevel_01.prototype.initialize = function () {
 
     //Initialize text properties
 
-    this.mMsg = new FontRenderable("60");
+    this.mMsg = new FontRenderable("80");
     this.mMsg.setColor([1, 0, 0, 1]);
     this.mMsg.getXform().setPosition(10, 16);
     this.mMsg.setTextHeight(2);
