@@ -30,6 +30,7 @@ function GameLevel_01(level) {
 
     //Audio
     this.kTimer = "assets/sounds/bomb_timer.mp3"
+    this.kOpen = "assets/sounds/open.mp3"
 
 
     //Text
@@ -104,6 +105,7 @@ GameLevel_01.prototype.loadScene = function () {
     gEngine.Textures.loadTexture(this.kimpact);
     gEngine.AudioClips.loadAudio(this.kCue);
     gEngine.AudioClips.loadAudio(this.kTimer);
+    gEngine.AudioClips.loadAudio(this.kOpen);
 };
 
 GameLevel_01.prototype.unloadScene = function () {
@@ -133,6 +135,7 @@ GameLevel_01.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kimpact);
     gEngine.AudioClips.unloadAudio(this.kCue);
     gEngine.AudioClips.unloadAudio(this.kTimer);
+    gEngine.AudioClips.unloadAudio(this.kOpen);
 
     if (this.mRestart === true) {
         var nextLevel = new GameLevel_01("Level1"); // next level to be loaded
@@ -411,7 +414,12 @@ GameLevel_01.prototype.update = function () {
         this.mKey.portarLlave(xpos, ypos);
     }
     if (openDoor && xpos > 62) {
-        this.mAllDoors.getObjectAt(0).unlockDoor();
+        var puerta = this.mAllDoors.getObjectAt(0)
+        puerta.unlockDoor();
+        if(openDoor && !puerta.getOpened()){
+            puerta.setOpened(true);
+            gEngine.AudioClips.playACue(this.kOpen);
+        }  
     }
 
     if (this.mIllumHero.getXform().getXPos() > this.kLevelFinishedPosition) {

@@ -16,6 +16,9 @@ function GameLevel_02(level, time) {
     this.kDoorBot = "assets/DoorInterior_Bottom.png";
     this.kDoorSleeve = "assets/DoorFrame_AnimSheet.png";
 
+    this.kLock = "assets/sounds/lock.mp3"
+    this.kOpen = "assets/sounds/open.mp3"
+
     this.mPowerUp = null;
     // specifics to the level
     this.kLevelFile = "assets/" + level + "/" + level + ".xml";  // e.g., assets/Level1/Level1.xml
@@ -87,6 +90,8 @@ GameLevel_02.prototype.loadScene = function () {
     gEngine.Textures.loadTexture(this.kDyeBoss_WeakPoint_Blue);
     gEngine.Textures.loadTexture(this.kDyeBoss_WeakPoint_Green);
     gEngine.Textures.loadTexture(this.kDyeBoss_WeakPoint_Red);
+    gEngine.AudioClips.loadAudio(this.kLock);
+    gEngine.AudioClips.loadAudio(this.kOpen);
 };
 
 GameLevel_02.prototype.unloadScene = function () {
@@ -116,6 +121,8 @@ GameLevel_02.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kDyeBoss_WeakPoint_Blue);
     gEngine.Textures.unloadTexture(this.kDyeBoss_WeakPoint_Green);
     gEngine.Textures.unloadTexture(this.kDyeBoss_WeakPoint_Red);
+    gEngine.AudioClips.unloadAudio(this.kOpen);
+    gEngine.AudioClips.unloadAudio(this.kLock);
     // next level to be loaded
     if (this.mRestart === true) {
         var nextLevel = new GameLevel_02("Level2", this.t); // next level to be loaded
@@ -316,7 +323,12 @@ GameLevel_02.prototype.update = function () {
 
     var openDoor = this.mIllumHero.canOpenDoor();
     if (openDoor && xpos > 62) {
-        this.mAllDoors.getObjectAt(0).unlockDoor();
+        var puerta = this.mAllDoors.getObjectAt(0)
+        puerta.unlockDoor();
+        if(openDoor && !puerta.getOpened()){
+            puerta.setOpened(true);
+            gEngine.AudioClips.playACue(this.kOpen);
+        } 
     }
     if (xpos > 65) {
         this.mRestart = false;
