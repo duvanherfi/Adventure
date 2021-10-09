@@ -97,7 +97,7 @@ GameLevel_03.prototype.unloadScene = function () {
     gEngine.AudioClips.unloadAudio(this.kOpen);
     // next level to be loaded
     if (this.mRestart === true) {
-        console.log(this.t);
+ 
         var nextLevel = new GameLevel_03("Level3", this.t); // next level to be loaded
         gEngine.Core.startScene(nextLevel);
     } else {

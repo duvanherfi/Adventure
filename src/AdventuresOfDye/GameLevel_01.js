@@ -20,13 +20,16 @@ function GameLevel_01(level) {
     this.kDoorTop = "assets/DoorInterior_Top.png";
     this.kDoorBot = "assets/DoorInterior_Bottom.png";
     this.kDoorSleeve = "assets/DoorFrame_AnimSheet.png";
-    this.kButton = "assets/DoorFrame_Button_180x100.png";
+    this.kButton = "assets/watch.png";
     this.kProjectileTexture = "assets/EMPPulse.png";
     this.kProjectileTexture2 = "assets/bullet.png";
     this.kimpact = "assets/particle.png";
     this.kCue = "assets/sounds/BGClip.mp3";
     this.kShield = "assets/escudo.png";
     this.kKey = "assets/key.png";
+
+    //Audio
+    this.kTimer = "assets/sounds/bomb_timer.mp3"
 
 
     //Text
@@ -100,6 +103,7 @@ GameLevel_01.prototype.loadScene = function () {
     gEngine.Textures.loadTexture(this.kBgLayerNormal);
     gEngine.Textures.loadTexture(this.kimpact);
     gEngine.AudioClips.loadAudio(this.kCue);
+    gEngine.AudioClips.loadAudio(this.kTimer);
 };
 
 GameLevel_01.prototype.unloadScene = function () {
@@ -128,6 +132,7 @@ GameLevel_01.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kBgLayerNormal);
     gEngine.Textures.unloadTexture(this.kimpact);
     gEngine.AudioClips.unloadAudio(this.kCue);
+    gEngine.AudioClips.unloadAudio(this.kTimer);
 
     if (this.mRestart === true) {
         var nextLevel = new GameLevel_01("Level1"); // next level to be loaded
@@ -139,6 +144,14 @@ GameLevel_01.prototype.unloadScene = function () {
 };
 
 GameLevel_01.prototype.initialize = function () {
+
+    var timer = this.kTimer;
+    setTimeout(function () {
+    
+         
+        gEngine.AudioClips.playBackgroundAudio(timer); 
+    }, 1000);
+
     // set ambient lighting
     gEngine.DefaultResources.setGlobalAmbientColor([1, 1, 1, 1]);
     gEngine.DefaultResources.setGlobalAmbientIntensity(0.2);
@@ -252,6 +265,7 @@ GameLevel_01.prototype.update = function () {
 
     //Implment about the timer (left function implement)
     var ms = this.mMsg;
+    // var timer = this.kTimer;
     var v = parseInt(ms.getText(), 10);
     if (v == 0) {
         v = 60;
@@ -261,6 +275,7 @@ GameLevel_01.prototype.update = function () {
         setTimeout(function () {
             v = v - 1;
             ms.setText(String(v));
+             
         }, 1000);
     }
     if (v % 5 == 0) {
