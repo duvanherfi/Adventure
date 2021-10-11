@@ -96,6 +96,7 @@ GameLevel_03.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kButton);
     gEngine.AudioClips.unloadAudio(this.kLock);
     gEngine.AudioClips.unloadAudio(this.kOpen);
+    gEngine.AudioClips.stopBackgroundAudio();
     // next level to be loaded
     if (this.mRestart === true) {
  
