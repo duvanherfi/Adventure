@@ -9,6 +9,7 @@ function Door(cx, cy, texture0, texture1, texture2, lightSet) {
     this.mTopInitialYPosition = 0;
     this.mBotInitialYPosition = 0;
     this.mIsOpen = false;
+    this.opened = false;
 
     this.mDoorTop = new LightRenderable(texture0);
     this.mDoorBot = new LightRenderable(texture1);
@@ -96,3 +97,11 @@ Door.prototype._openDoor = function () {
 Door.prototype.unlockDoor = function () {
     this.mIsOpen = true;
 };
+
+Door.prototype.setOpened = function (t){
+    this.opened = t;
+}
+
+Door.prototype.getOpened = function (){
+    return this.opened;
+}

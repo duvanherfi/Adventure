@@ -29,8 +29,8 @@ function GameLevel_03(level, time) {
     this.mCamera = null;
     this.mPeekCam = null;
     this.mShowPeek = false;
-    this.t = time || new FontRenderable("30");
-    this.mMsg = time || new FontRenderable("30");
+    this.t = time;
+    this.mMsg = time ;
     this.mRestart = false;
     // the hero and the support objects
     this.mplatform = null;
@@ -94,12 +94,14 @@ GameLevel_03.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kBgLayerNormal);
     gEngine.Textures.unloadTexture(this.kTnt);
     gEngine.Textures.unloadTexture(this.kButton);
-    gEngine.AudioClips.unloadAudio(this.kOpen);
+    gEngine.AudioClips.unloadAudio(this.kLock);
+    gEngine.AudioClips.unloadAudio(this.kOpen);    
     // next level to be loaded
-    if (this.mRestart === true) {
+    if (this.mRestart === true) { 
         var nextLevel = new GameLevel_03("Level3", this.t); // next level to be loaded
         gEngine.Core.startScene(nextLevel);
     } else {
+        gEngine.AudioClips.stopBackgroundAudio();
         var nextLevel = new EndView(); // next level to be loaded
         gEngine.Core.startScene(nextLevel);
     }
@@ -163,6 +165,8 @@ GameLevel_03.prototype.initialize = function () {
         this.kTnt,
         this.mGlobalLightSet
     );
+    var t = this.mMsg.getText();
+    this.mMsg = new FontRenderable(t);
     this.mMsg.setColor([1, 0, 0, 1]);
     this.mMsg.getXform().setPosition(10, 16);
     this.mMsg.setTextHeight(2);
@@ -229,9 +233,10 @@ GameLevel_03.prototype.update = function () {
         setTimeout(function () {
             v = v - 1;
             ms.setText(String(v));
-            if(v <= 10){
-                this.mCamera.shake(-2, -2, 20, 30);
-            }
+           
+            // if(v <= 10){
+            //     this.mCamera.shake(-2, -2, 20, 30);
+            // }
         }, 1000);
     }
 
