@@ -95,14 +95,13 @@ GameLevel_03.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kTnt);
     gEngine.Textures.unloadTexture(this.kButton);
     gEngine.AudioClips.unloadAudio(this.kLock);
-    gEngine.AudioClips.unloadAudio(this.kOpen);
-    gEngine.AudioClips.stopBackgroundAudio();
+    gEngine.AudioClips.unloadAudio(this.kOpen);    
     // next level to be loaded
-    if (this.mRestart === true) {
- 
+    if (this.mRestart === true) { 
         var nextLevel = new GameLevel_03("Level3", this.t); // next level to be loaded
         gEngine.Core.startScene(nextLevel);
     } else {
+        gEngine.AudioClips.stopBackgroundAudio();
         var nextLevel = new EndView(); // next level to be loaded
         gEngine.Core.startScene(nextLevel);
     }
